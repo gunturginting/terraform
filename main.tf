@@ -6,19 +6,31 @@ resource "aws_vpc" "prod-food-ordering-vpc" {
   cidr_block = "10.0.0.0/16"
 }
 
-resource "aws_subnet" "public-subnet" {
+resource "aws_subnet" "public-subnet-1" {
   vpc_id     = aws_vpc.prod-food-ordering-vpc.id
-  cidr_block = "10.0.1.0/24"
+  cidr_block = "10.0.2.0/24"
   map_public_ip_on_launch = true
+  availability_zone = "ap-southeast-1a"
 
   tags = {
-    Name = "Public Subnet"
+    Name = "Public Subnet 1"
+  }
+}
+
+resource "aws_subnet" "public-subnet-2" {
+  vpc_id     = aws_vpc.prod-food-ordering-vpc.id
+  cidr_block = "10.0.3.0/24"
+  map_public_ip_on_launch = true
+  availability_zone = "ap-southeast-1b"
+
+  tags = {
+    Name = "Public Subnet 2"
   }
 }
 
 resource "aws_subnet" "private-subnet" {
   vpc_id     = aws_vpc.prod-food-ordering-vpc.id
-  cidr_block = "10.0.2.0/24"
+  cidr_block = "10.0.1.0/24"
 
   tags = {
     Name = "Private Subnet"
@@ -39,7 +51,7 @@ resource "aws_eip" "food-ordering-eip" {
 
 resource "aws_nat_gateway" "food-ordering-nat" {
   allocation_id = aws_eip.food-ordering-eip.id
-  subnet_id     = aws_subnet.public-subnet.id
+  subnet_id     = aws_subnet.public-subnet-1.id
 
   tags = {
     Name = "Main NAT Gateway"
@@ -48,7 +60,7 @@ resource "aws_nat_gateway" "food-ordering-nat" {
   depends_on = [aws_internet_gateway.food-ordering-igw]
 }
 
-resource "aws_route_table" "public" {
+resource "aws_route_table" "public-1" {
   vpc_id = aws_vpc.prod-food-ordering-vpc.id
 
   route {
@@ -57,7 +69,20 @@ resource "aws_route_table" "public" {
   }
 
   tags = {
-    Name = "Public Route Table"
+    Name = "Public Route Table 1"
+  }
+}
+
+resource "aws_route_table" "public-2" {
+  vpc_id = aws_vpc.prod-food-ordering-vpc.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.food-ordering-igw.id
+  }
+
+  tags = {
+    Name = "Public Route Table 2"
   }
 }
 
@@ -74,9 +99,14 @@ resource "aws_route_table" "private" {
   }
 }
 
-resource "aws_route_table_association" "public" {
-  subnet_id      = aws_subnet.public-subnet.id
-  route_table_id = aws_route_table.public.id
+resource "aws_route_table_association" "public-1" {
+  subnet_id      = aws_subnet.public-subnet-1.id
+  route_table_id = aws_route_table.public-1.id
+}
+
+resource "aws_route_table_association" "public-2" {
+  subnet_id      = aws_subnet.public-subnet-2.id
+  route_table_id = aws_route_table.public-2.id
 }
 
 resource "aws_route_table_association" "private" {
@@ -230,9 +260,9 @@ resource "aws_iam_instance_profile" "ec2_instance_profile" {
 
 resource "aws_launch_configuration" "food-ordering-launch-configuration" {
   name          = "food-ordering-launch-configuration"
-  image_id      = "ami-0c55b159cbfafe1f0"
+  image_id      = "ami-0be48b687295f8bd6"
   instance_type = "t2.micro"
-  key_name      = "your-key-pair-name"
+  key_name      = "guntur"
 
   security_groups = [aws_security_group.instance-sg.id]
 
@@ -330,7 +360,7 @@ resource "aws_lb" "food-ordering-elb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb-sg.id]
-  subnets            = [aws_subnet.public-subnet.id]
+  subnets            = [aws_subnet.public-subnet-1.id, aws_subnet.public-subnet-2.id]
 
   enable_deletion_protection = false
 
