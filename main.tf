@@ -34,7 +34,7 @@ resource "aws_internet_gateway" "food-ordering-igw" {
 }
 
 resource "aws_eip" "food-ordering-eip" {
-  vpc = true
+  domain = "vpc"
 }
 
 resource "aws_nat_gateway" "food-ordering-nat" {
@@ -117,7 +117,7 @@ resource "aws_security_group" "instance-sg" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    security_groups = [aws_security_group.alb_sg.id]
+    security_groups = [aws_security_group.alb-sg.id]
   }
 
   ingress {
