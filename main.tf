@@ -261,7 +261,7 @@ resource "aws_iam_instance_profile" "ec2_instance_profile" {
 resource "aws_launch_configuration" "food-ordering-launch-configuration" {
   name          = "food-ordering-launch-configuration"
   image_id      = "ami-0be48b687295f8bd6"
-  instance_type = "t2.micro"
+  instance_type = "t2.micro" # Can adjust according to the needs
   key_name      = "guntur"
 
   security_groups = [aws_security_group.instance-sg.id]
