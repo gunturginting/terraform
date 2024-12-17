@@ -50,7 +50,7 @@ resource "aws_rds_cluster" "aurora_postgres" {
     db_subnet_group_name = aws_db_subnet_group.aurora_subnet_group.name
     
     tags = {
-      ManagedBy = Terraform
+      ManagedBy = "Terraform"
       Project = "${var.eks_name}"
     }
 }

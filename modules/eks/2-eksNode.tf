@@ -37,8 +37,8 @@ resource "aws_eks_node_group" "eks_node" {
     node_group_name = "ecosystem-node"
     node_role_arn = aws_iam_role.iam_role_nodes.arn
     subnet_ids = [
-        aws_subnet.private_subnet_1.id,
-        aws_subnet.private_subnet_2.id
+        var.private_subnet_1,
+        var.private_subnet_2
     ]
 
     capacity_type = "ON_DEMAND"
