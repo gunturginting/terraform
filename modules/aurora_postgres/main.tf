@@ -39,7 +39,7 @@ resource "aws_db_subnet_group" "aurora_subnet_group" {
 resource "aws_rds_cluster" "aurora_postgres" {
     cluster_identifier = "aurora-cluster-postgresql-${var.env}-${var.eks_name}"
     engine = "aurora-postgresql"
-    engine_version = "13.12"
+    engine_version = "16.3"
     availability_zones = ["${var.zone_1}", "${var.zone_2}"]
     database_name = "ppobwhatsapp"
     master_username = "postgres"
@@ -59,7 +59,7 @@ resource "aws_rds_cluster_instance" "aurora_postgres_slave" {
     count = 1
     identifier = "aurora-cluster-postgresql-${var.env}-${var.eks_name}-${count.index}"
     cluster_identifier = aws_rds_cluster.aurora_postgres.id
-    instance_class = "db.t3.medium"
+    instance_class = "db.t3.xlarge"
     engine = aws_rds_cluster.aurora_postgres.engine
     engine_version = aws_rds_cluster.aurora_postgres.engine_version
 
