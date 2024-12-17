@@ -9,7 +9,7 @@ module "network" {
 }
 
 module "aws_eks" {
-    source = "./aws-eks"
+    source = "./eks"
     region = var.region
     env = var.env
     zone_1 = var.zone_1
