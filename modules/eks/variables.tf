@@ -13,3 +13,13 @@ variable "eks_name" {
     description = "AWS EKS Name"
     type = string
 }
+
+variable "private_subnet_1" {
+  description = "Private subnet 1 ID"
+  type = string
+}
+
+variable "private_subnet_2" {
+  description = "Private subnet 2 ID"
+  type = string
+}

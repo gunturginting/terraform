@@ -13,6 +13,8 @@ module "aws_eks" {
     region = var.region
     env = var.env
     eks_name = var.eks_name
+    private_subnet_1 = module.network.private_subnet_1
+    private_subnet_2 = module.network.private_subnet_2
 }
 
 module "aurora-postgres" {
@@ -24,4 +26,6 @@ module "aurora-postgres" {
     eks_name = var.eks_name
     vpc_id = module.network.vpc_id
     vpc_cidr_block = module.network.vpc_cidr_block
+    private_subnet_1 = module.network.private_subnet_1
+    private_subnet_2 = module.network.private_subnet_2
 }

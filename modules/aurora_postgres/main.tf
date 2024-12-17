@@ -27,8 +27,8 @@ resource "aws_db_subnet_group" "aurora_subnet_group" {
     description = "Subnet group for Aurora RDS in ${var.env} environment"
 
     subnet_ids = [
-        aws_subnet.private_subnet_1.id,
-        aws_subnet.private_subnet_2.id
+        var.private_subnet_1,
+        var.private_subnet_2
     ]
 
     tags = {
