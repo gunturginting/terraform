@@ -31,13 +31,3 @@ variable "eks_name" {
     description = "AWS EKS Name"
     type = string
 }
-
-variable "vpc_id" {
-  description = "VPC ID"
-  type        = string
-}
-
-variable "vpc_cidr_block" {
-  description = "VPC CIDR Block"
-  type        = string
-}
