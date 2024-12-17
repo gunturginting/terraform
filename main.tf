@@ -28,4 +28,5 @@ module "aurora-postgres" {
     vpc_cidr_block = module.network.vpc_cidr_block
     private_subnet_1 = module.network.private_subnet_1
     private_subnet_2 = module.network.private_subnet_2
+    db_master_password = var.db_master_password
 }
