@@ -49,6 +49,7 @@ resource "aws_rds_cluster" "aurora_postgres" {
     vpc_security_group_ids = [aws_security_group.rds_sg.id]
     db_subnet_group_name = aws_db_subnet_group.aurora_subnet_group.name
     enabled_cloudwatch_logs_exports = ["postgresql"]
+    skip_final_snapshot = true
     
     tags = {
       ManagedBy = "Terraform"
