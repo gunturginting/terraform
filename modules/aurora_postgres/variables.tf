@@ -45,3 +45,9 @@ variable "zone_3" {
     type = string
     # default = "ap-southeast-1c"
 }
+
+variable "db_master_password" {
+  description = "The master password for the database"
+  type        = string
+  sensitive   = true
+}
