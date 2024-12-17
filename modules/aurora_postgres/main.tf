@@ -48,7 +48,7 @@ resource "aws_rds_cluster" "aurora_postgres" {
     preferred_backup_window = "19:00-20:00"
     vpc_security_group_ids = [aws_security_group.rds_sg.id]
     db_subnet_group_name = aws_db_subnet_group.aurora_subnet_group.name
-    enabled_cloudwatch_logs_exports = ["error", "general", "slowquery"]
+    enabled_cloudwatch_logs_exports = ["postgresql"]
     
     tags = {
       ManagedBy = "Terraform"
