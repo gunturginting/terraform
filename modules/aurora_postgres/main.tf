@@ -64,7 +64,7 @@ resource "aws_rds_cluster_instance" "aurora_postgres_slave" {
     engine_version = aws_rds_cluster.aurora_postgres.engine_version
 
     tags = {
-      ManagedBy = Terraform
+      ManagedBy = "Terraform"
       Project = "${var.eks_name}"
     }
 }
