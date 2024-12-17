@@ -41,9 +41,9 @@ resource "aws_rds_cluster" "aurora_postgres" {
     engine = "aurora-postgresql"
     engine_version = "13.12"
     availability_zones = ["${var.zone_1}", "${var.zone_2}"]
-    database_name = "pegadaian"
+    database_name = "ppob"
     master_username = "postgres"
-    master_password = "P@ss42024!"
+    master_password = "P@ss42024"
     backup_retention_period = 7
     preferred_backup_window = "19:00-20:00"
     vpc_security_group_ids = [aws_security_group.rds_sg.id]
