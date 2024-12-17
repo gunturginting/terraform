@@ -43,15 +43,17 @@ resource "aws_rds_cluster" "aurora_postgres" {
     availability_zones = ["${var.zone_1}", "${var.zone_2}"]
     database_name = "ppobwhatsapp"
     master_username = "postgres"
-    master_password = "Pass42024"
+    master_password = var.db_master_password
     backup_retention_period = 7
     preferred_backup_window = "19:00-20:00"
     vpc_security_group_ids = [aws_security_group.rds_sg.id]
     db_subnet_group_name = aws_db_subnet_group.aurora_subnet_group.name
+    enabled_cloudwatch_logs_exports = ["error", "general", "slowquery"]
     
     tags = {
       ManagedBy = "Terraform"
       Project = "${var.eks_name}"
+      Environment = var.env
     }
 }
 
@@ -62,9 +64,11 @@ resource "aws_rds_cluster_instance" "aurora_postgres_slave" {
     instance_class = "db.t3.xlarge"
     engine = aws_rds_cluster.aurora_postgres.engine
     engine_version = aws_rds_cluster.aurora_postgres.engine_version
+    performance_insights_enabled = true
 
     tags = {
       ManagedBy = "Terraform"
       Project = "${var.eks_name}"
+      Environment = var.env
     }
 }

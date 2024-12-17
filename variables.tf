@@ -31,3 +31,9 @@ variable "eks_name" {
     description = "AWS EKS Name"
     type = string
 }
+
+variable "db_master_password" {
+  description = "The master password for the database"
+  type        = string
+  sensitive   = true
+}
