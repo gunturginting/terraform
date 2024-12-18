@@ -39,7 +39,7 @@ resource "aws_db_subnet_group" "aurora_subnet_group" {
 resource "aws_rds_cluster" "aurora_postgres" {
     cluster_identifier = "aurora-cluster-postgresql-${var.env}-${var.eks_name}"
     engine = "aurora-postgresql"
-    engine_version = "15.10"
+    engine_version = "15.10-R1"
     availability_zones = ["${var.zone_1}", "${var.zone_2}"]
     database_name = "ppobwhatsapp"
     master_username = "postgres"
