@@ -30,3 +30,7 @@ module "aurora-postgres" {
     private_subnet_2 = module.network.private_subnet_2
     db_master_password = var.db_master_password
 }
+
+module "aws_ecr" {
+    source = "./modules/ecr"
+}
