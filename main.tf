@@ -15,7 +15,6 @@ terraform {
 
 module "network" {
     source = "./modules/network"
-    region = var.region
     env = var.env
     zone_1 = var.zone_1
     zone_2 = var.zone_2
