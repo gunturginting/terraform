@@ -83,16 +83,16 @@ module "ec2_jmeter" {
     vpc_cidr_block = module.network.vpc_cidr_block
 }
 
-module "install_ansible" {
-    source = "./modules/provisioner_jumphost"
-    ec2_jumpserver_id = module.ec2_jumpserver.jumphost_id
-    ec2_jumpserver_public_ip = module.ec2_jumpserver.jumphost_public_ip
-}
+# module "install_ansible" {
+#     source = "./modules/provisioner_jumphost"
+#     ec2_jumpserver_id = module.ec2_jumpserver.jumphost_id
+#     ec2_jumpserver_public_ip = module.ec2_jumpserver.jumphost_public_ip
+# }
 
-module "install_jmeter" {
-    source = "./modules/provisioner_jmeter"
-    ec2_jumpserver_id = module.ec2_jumpserver.jumphost_id
-    ec2_jumpserver_public_ip = module.ec2_jumpserver.jumphost_public_ip
-    jmeter_master_ip = module.ec2_jmeter.jmeter_master_ip
-    jmeter_slaves_ip = module.ec2_jmeter.jmeter_slaves_ip
-}
+# module "install_jmeter" {
+#     source = "./modules/provisioner_jmeter"
+#     ec2_jumpserver_id = module.ec2_jumpserver.jumphost_id
+#     ec2_jumpserver_public_ip = module.ec2_jumpserver.jumphost_public_ip
+#     jmeter_master_ip = module.ec2_jmeter.jmeter_master_ip
+#     jmeter_slaves_ip = module.ec2_jmeter.jmeter_slaves_ip
+# }
