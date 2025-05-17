@@ -44,7 +44,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow_elastic_2" {
     ip_protocol = "tcp"
 }
 
-resource "aws_vpc_security_group_egress_rule" "egress_rule_jumpserver" {
+resource "aws_vpc_security_group_egress_rule" "egress_rule_elastic" {
     security_group_id = aws_security_group.elastic_sg.id
     cidr_ipv4 = "0.0.0.0/0"
     ip_protocol = "-1"

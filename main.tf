@@ -69,6 +69,21 @@ module "ec2_jmeter" {
     vpc_cidr_block = module.network.vpc_cidr_block
 }
 
+module "ec2_elastic" {
+    source = "./modules/ec2_elastic"
+    private_subnet_1 = module.network.private_subnet_1
+    private_subnet_2 = module.network.private_subnet_2
+    vpc_id = module.network.vpc_id
+    vpc_cidr_block = module.network.vpc_cidr_block
+}
+
+module "ec2_pam" {
+    source = "./modules/ec2_pam"
+    private_subnet_1 = module.network.private_subnet_1
+    vpc_id = module.network.vpc_id
+    vpc_cidr_block = module.network.vpc_cidr_block
+}
+
 # module "install_ansible" {
 #     source = "./modules/provisioner_jumphost"
 #     ec2_jumpserver_id = module.ec2_jumpserver.jumphost_id
