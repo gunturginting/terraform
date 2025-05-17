@@ -36,6 +36,7 @@ variable "db_master_password" {
   description = "The master password for the database"
   type        = string
   sensitive   = true
+  default = "test"
 }
 
 variable "redis_name" {
@@ -47,4 +48,5 @@ variable "redis_password" {
   description = "The master password for the redis"
   type        = string
   sensitive   = true
+  default = "test"
 }
