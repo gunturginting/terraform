@@ -37,3 +37,14 @@ variable "db_master_password" {
   type        = string
   sensitive   = true
 }
+
+variable "redis_name" {
+    description = "AWS Redis Name"
+    type = string
+}
+
+variable "redis_password" {
+  description = "The master password for the redis"
+  type        = string
+  sensitive   = true
+}

@@ -41,13 +41,14 @@ resource "aws_eks_node_group" "eks_node" {
         var.private_subnet_2
     ]
 
+    ami_type = "AL2023_x86_64_STANDARD"
     capacity_type = "ON_DEMAND"
-    instance_types = ["t3.xlarge"]
+    instance_types = ["m5.8xlarge"]
 
     scaling_config {
-      desired_size = 1
-      max_size = 3
-      min_size = 1
+      desired_size = 2
+      max_size = 6
+      min_size = 2
     }
 
     update_config {

@@ -1,9 +1,3 @@
-variable "region" {
-    description = "AWS Region"
-    type = string
-    # default = "ap-southeast-1"
-}
-
 variable "zone_1" {
     description = "AWS Region az 1"
     type = string

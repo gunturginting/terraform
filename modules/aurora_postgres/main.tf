@@ -62,7 +62,7 @@ resource "aws_rds_cluster_instance" "aurora_postgres_slave" {
     count = 1
     identifier = "aurora-cluster-postgresql-${var.env}-${var.eks_name}-${count.index}"
     cluster_identifier = aws_rds_cluster.aurora_postgres.id
-    instance_class = "db.r6g.large"
+    instance_class = "db.r6g.4xlarge"
     engine = aws_rds_cluster.aurora_postgres.engine
     engine_version = aws_rds_cluster.aurora_postgres.engine_version
     performance_insights_enabled = true
