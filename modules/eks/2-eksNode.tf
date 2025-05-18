@@ -41,7 +41,7 @@ resource "aws_eks_node_group" "eks_node" {
         var.private_subnet_2
     ]
 
-    ami_type = "AL2023_x86_64_STANDARD"
+    #ami_type = "AL2023_x86_64_STANDARD"
     capacity_type = "ON_DEMAND"
     instance_types = ["t3.medium"]
 
