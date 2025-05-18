@@ -23,3 +23,9 @@ variable "private_subnet_2" {
   description = "Private subnet 2 ID"
   type = string
 }
+
+variable "argocd_namespace" {
+  description = "Namespace to install ArgoCD"
+  type        = string
+  default     = "argocd"
+}
