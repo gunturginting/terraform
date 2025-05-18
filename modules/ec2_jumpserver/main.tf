@@ -20,6 +20,22 @@ resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
     ip_protocol = "tcp"
 }
 
+resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
+    security_group_id = aws_security_group.jumpserver_sg.id
+    cidr_ipv4 = "0.0.0.0/0"
+    from_port = 80
+    to_port = 80
+    ip_protocol = "tcp"
+}
+
+resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
+    security_group_id = aws_security_group.jumpserver_sg.id
+    cidr_ipv4 = "0.0.0.0/0"
+    from_port = 443
+    to_port = 443
+    ip_protocol = "tcp"
+}
+
 resource "aws_vpc_security_group_egress_rule" "egress_rule_jumpserver" {
     security_group_id = aws_security_group.jumpserver_sg.id
     cidr_ipv4 = "0.0.0.0/0"
